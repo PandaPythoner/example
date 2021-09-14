@@ -4,31 +4,23 @@
 #include <algorithm>
 #include <fstream>
 #include <string>
-#include <sstream>
 
 
 using namespace std;
-
-
-/*
-Navalny is the best!
-*/
 
 
 int32_t main(){
 	ofstream file;
 	file.open("users_data.txt", ios_base::app);
 	cout << "Hellow, user! We need some data about you." << "\n";
-	string name1, name2, book, party;
+	string name1, name2, book;
 	cout << "First name: ";
-	getline(cin, name1, '\n');
+	cin >> name1;
 	cout << "Second name: ";
-	getline(cin, name2, '\n');
+	cin >> name2;
 	cout << "Your favorite book: ";
-	getline(cin, book, '\n');
-	cout << "Which party will you vote for: ";
-	getline(cin, party, '\n');
-	file << name1 << " " << name2 << " '" << book << "' '" << party << "'\n";
+	cin >> book;
+	file << name1 << " " << name2 << " " << book << "\n";
 	file.close();
 	return 0;
 }
