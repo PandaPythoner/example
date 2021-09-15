@@ -12,9 +12,20 @@ using namespace std;
 string users_data_filename = "users_data.txt";
 
 
+void print_users_data() {
+	ifstream file;
+	file.open(users_data_filename.data());
+	string name1, name2, book;
+	while (getline(file, name1, ';')) {
+		getline(file, name2, ';');
+		getline(file, book, ';');
+		cout << name1 << " " << name2 << " " << book << "\n";
+		getline(file, name1, '\n');
+	}
+}
+
 
 int32_t main(){
-	print_users_data();
 	ofstream file;
 	file.open(users_data_filename.data(), ios_base::app);
 	cout << "Hellow, user! We need some data about you." << "\n";
@@ -25,7 +36,7 @@ int32_t main(){
 	cin >> name2;
 	cout << "Your favorite book: ";
 	cin >> book;
-	file << name1 << "; " << name2 << "; " << book << ";\n";
+	file << name1 << ";" << name2 << ";" << book << ";\n";
 	file.close();
 	return 0;
 }
