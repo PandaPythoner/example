@@ -25,7 +25,7 @@ void print_users_data() {
 }
 
 
-int32_t main(){
+void ask_user_data() {
 	ofstream file;
 	file.open(users_data_filename.data(), ios_base::app);
 	cout << "Hellow, user! We need some data about you." << "\n";
@@ -38,5 +38,20 @@ int32_t main(){
 	cin >> book;
 	file << name1 << ";" << name2 << ";" << book << ";\n";
 	file.close();
+}
+
+
+int32_t main(){
+	cout << "Do you want to see other users data(Y/N)?" << "\n";
+	char c = 0;
+	while (c != 'Y' && c != 'N') {
+		cin >> c;
+	}
+	if (c == 'Y') {
+		print_users_data();
+	}
+	else {
+		ask_user_data();
+	}
 	return 0;
 }
