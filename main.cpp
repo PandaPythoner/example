@@ -10,44 +10,62 @@ using namespace std;
 
 
 string users_data_filename = "users_data.txt";
+string asks_data_filename = "asks.txt";
+
+vector<string> asks;
+
+
+void get_asks() {
+	ifstream file;
+	file.open(asks_data_filename.data());
+	string ask;
+	asks.clear();
+	while (getline(file, ask)) {
+		asks.push_back(ask);
+	}
+}
 
 
 void print_users_data() {
 	ifstream file;
 	file.open(users_data_filename.data());
-	string name1, name2, book;
-	while (getline(file, name1, ';')) {
-		getline(file, name2, ';');
-		getline(file, book, ';');
-		cout << name1 << " " << name2 << " " << book << "\n";
-		getline(file, name1, '\n');
+	string s;
+	while (getline(file, s, ';')) {
+		for (int i = 0; i < asks.size(); ++i) {
+			cout << "'" << s << "' ";
+			if (i != asks.size() - 1) {
+				getline(file, s, ';');
+			}
+		}
+		getline(file, s, '\n');
+		cout << "\n";
 	}
 }
 
 
-void ask_user_data() {
+
+void ask_user_data(){
 	ofstream file;
 	file.open(users_data_filename.data(), ios_base::app);
-	cout << "Hellow, user! We need some data about you." << "\n";
-	string name1, name2, book;
-	cout << "First name: ";
-	cin >> name1;
-	cout << "Second name: ";
-	cin >> name2;
-	cout << "Your favorite book: ";
-	cin >> book;
-	file << name1 << ";" << name2 << ";" << book << ";\n";
+	vector<string> answers(asks.size());
+	for (int i = 0; i < asks.size(); ++i) {
+		cout << asks[i];
+		getline(cin, answers[i]);
+		file << answers[i] << ';';
+	}
+	file << '\n';
 	file.close();
 }
 
 
 int32_t main(){
+	get_asks();
 	cout << "Do you want to see other users data(Y/N)?" << "\n";
-	char c = 0;
-	while (c != 'Y' && c != 'N') {
-		cin >> c;
+	string s = "";
+	while (s != "Y" && s != "N") {
+		getline(cin, s);
 	}
-	if (c == 'Y') {
+	if (s == "Y") {
 		print_users_data();
 	}
 	else {
