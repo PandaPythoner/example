@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <fstream>
 #include <string>
+#include <set>
 
 
 using namespace std;
@@ -26,7 +27,7 @@ void get_asks() {
 }
 
 
-void print_users_data(int sorting_index = 0) {
+void print_users_data(int sorting_index = 0, int interesting_index = 2) {
 	ifstream file;
 	file.open(users_data_filename.data());
 	vector<vector<string>> answers;
@@ -44,12 +45,17 @@ void print_users_data(int sorting_index = 0) {
 	sort(answers.begin(), answers.end(), [sorting_index](const vector<string>& a, const vector<string>& b) {
 		return a[sorting_index] < b[sorting_index];
 	});
+	set<string> interesting;
 	for (auto& a : answers) {
 		for (auto& s : a) {
 			cout << "'" << s << "' ";
 		}
 		cout << "\n";
+		interesting.insert(a[interesting_index]);
 	}
+	cout << "Statistics: " << "\n";
+	cout << "Users: " << answers.size() << "\n";
+	cout << "Books: " << interesting.size() << "\n";
 }
 
 
