@@ -26,7 +26,7 @@ void get_asks() {
 }
 
 
-void print_users_data() {
+void print_users_data(int sorting_index = 0) {
 	ifstream file;
 	file.open(users_data_filename.data());
 	vector<vector<string>> answers;
@@ -41,8 +41,8 @@ void print_users_data() {
 		}
 		getline(file, s, '\n');
 	}
-	sort(answers.begin(), answers.end(), [](const vector<string>& a, const vector<string>& b) {
-		return a[0] < b[0];
+	sort(answers.begin(), answers.end(), [sorting_index](const vector<string>& a, const vector<string>& b) {
+		return a[sorting_index] < b[sorting_index];
 	});
 	for (auto& a : answers) {
 		for (auto& s : a) {
