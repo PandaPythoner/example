@@ -30,7 +30,7 @@ void get_asks() {
 void print_users_data(int sorting_index = 0, int interesting_index = 2) {
 	ifstream file;
 	file.open(users_data_filename.data());
-	vector<vector<string>> answers;
+	vector<vector<string> > answers;
 	string s;
 	while (getline(file, s, ';')) {
 		answers.push_back(vector<string>());
@@ -74,6 +74,27 @@ void ask_user_data() {
 }
 
 
+void change_questions() {
+    ofstream file;
+    string s = "";
+    cout << "Do you want to delete old asks(Y/N)?" << "\n";
+    getline(cin, s);
+    if(s == "Y")
+        file.open(asks_data_filename.data());
+    else
+        file.open(asks_data_filename.data(), ofstream::app);
+	cout << "Enter number of asks:" << "\n";
+	int num;
+	cin >> num;
+	cout << "Enter your asks:" << "\n";
+	for (int i = 0; i < num; i++) {
+		getline(cin, s);
+		file << s << "\n";
+	}
+	file.close();
+}
+
+
 int32_t main() {
 	get_asks();
 	cout << "Do you want to see other users data(Y/N)?" << "\n";
@@ -85,7 +106,12 @@ int32_t main() {
 		print_users_data();
 	}
 	else {
-		ask_user_data();
+        cout << "Do you want to change asks(Y/N)?" << "\n";
+        getline(cin, s);
+        if(s == "Y")
+            change_questions();
+        else
+            ask_user_data();
 	}
 	return 0;
 }
