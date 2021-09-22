@@ -94,6 +94,9 @@ void change_questions() {
 		file << s << "\n";
 	}
 	file.close();
+	//delete all answers:
+	file.open(users_data_filename.data());
+	file.close();
 }
 
 
