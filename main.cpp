@@ -83,11 +83,13 @@ void change_questions() {
         file.open(asks_data_filename.data());
     else
         file.open(asks_data_filename.data(), ofstream::app);
-	cout << "Enter number of asks:" << "\n";
+	cout << "Enter number of new asks:" << "\n";
 	int num;
 	cin >> num;
-	cout << "Enter your asks:" << "\n";
-	for (int i = 0; i < num; i++) {
+	if(num > 0)
+        cout << "Enter your asks:" << "\n";
+    getline(cin, s);//cin and getline don't like each other
+	for (int i = 0; i < num; ++i) {
 		getline(cin, s);
 		file << s << "\n";
 	}
