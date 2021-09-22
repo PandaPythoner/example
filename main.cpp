@@ -102,21 +102,21 @@ void change_questions() {
 
 int32_t main() {
 	get_asks();
-	cout << "Do you want to see other users data(Y/N)?" << "\n";
+	cout << "Do you want to see other users data(1)?" << "\n";
+	cout << "Do you want to change asks(2)?" << "\n";
+	cout << "Do you want answer the asks?(3)" << "\n";
 	string s = "";
-	while (s != "Y" && s != "N") {
+	while (s != "1" && s != "2" && s!="3") {
 		getline(cin, s);
 	}
-	if (s == "Y") {
+	if (s == "1") {
 		print_users_data();
 	}
-	else {
-        cout << "Do you want to change asks(Y/N)?" << "\n";
-        getline(cin, s);
-        if(s == "Y")
-            change_questions();
-        else
-            ask_user_data();
+	else if(s == "2") {
+        change_questions();
 	}
+    else{
+        ask_user_data();
+    }
 	return 0;
 }
